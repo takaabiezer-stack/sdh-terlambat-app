@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/c/Users/SDH KUPANG GOLD/Pictures/**)",
+      "Bash(npm install *)",
+      "PowerShell(netstat -an)",
+      "Read(//c/Program Files/**)",
+      "PowerShell(& \"C:\\\\nodejs\\\\node-v20.18.1-win-x64\\\\node.exe\" --version 2>&1)",
+      "Read(//c//**)",
+      "PowerShell([System.IO.DriveInfo]::GetDrives\\(\\) | Select-Object Name, DriveType, IsReady)",
+      "Read(//d//**)",
+      "Bash(timeout 5 \"C:/nodejs/node-v20.18.1-win-x64/node.exe\" app.js)",
+      "Bash(\"C:/nodejs/node-v20.18.1-win-x64/node.exe\" app.js)",
+      "Bash(kill %1)",
+      "Bash(wait)",
+      "Bash(C:/nodejs/node-v20.18.1-win-x64/node.exe -e ' *)",
+      "Bash(\"C:/nodejs/node-v20.18.1-win-x64/npm.cmd\" install *)",
+      "Bash(where winget *)",
+      "Bash(where choco *)",
+      "Bash(where scoop *)",
+      "Bash(winget search *)",
+      "Bash(winget install *)",
+      "Bash(jobs)",
+      "Bash(mkdir -p /c/data/db)",
+      "Bash(\"/c/Program Files/MongoDB/Server/8.2/bin/mongod.exe\" --dbpath \"C:/data/db\" --logpath \"C:/data/mongod.log\" --fork)",
+      "Bash(\"/c/Program Files/MongoDB/Server/8.2/bin/mongod.exe\" --dbpath \"C:\\\\\\\\data\\\\\\\\db\" --logpath \"C:\\\\\\\\data\\\\\\\\mongod.log\" --logappend)",
+      "Bash(echo \"MongoDB started with PID $!\")",
+      "Bash(\"C:/nodejs/node-v20.18.1-win-x64/node.exe\" utils/seedData.js)",
+      "Bash(echo \"Backend PID: $!\")",
+      "Bash(curl -s http://localhost:5000/api/health)",
+      "Bash(\"C:/nodejs/node-v20.18.1-win-x64/node.exe\" node_modules/vite/bin/vite.js)",
+      "Bash(echo \"Frontend PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
+    ]
+  }
+}

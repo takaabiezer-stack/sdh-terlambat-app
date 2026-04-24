@@ -1,0 +1,31 @@
+{
+  "name": "sdh-terlambat-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "C:\\nodejs\\node-v20.18.1-win-x64\\node.exe node_modules\\vite\\bin\\vite.js",
+    "build": "C:\\nodejs\\node-v20.18.1-win-x64\\node.exe node_modules\\vite\\bin\\vite.js build",
+    "preview": "C:\\nodejs\\node-v20.18.1-win-x64\\node.exe node_modules\\vite\\bin\\vite.js preview"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "date-fns": "^3.0.6",
+    "html5-qrcode": "^2.3.8",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.21.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "vite": "^5.0.8"
+  }
+}
