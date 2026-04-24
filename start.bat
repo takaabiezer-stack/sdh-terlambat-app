@@ -21,7 +21,7 @@ echo [1/4] Memeriksa MongoDB...
 sc query MongoDB >nul 2>&1
 if %errorlevel% equ 0 (
     net start MongoDB >nul 2>&1
-    echo       MongoDB service ditemukan dan dijalankan.
+    echo       MongoDB: OK (service)
 ) else (
     where mongod >nul 2>&1
     if %errorlevel% equ 0 (
@@ -29,15 +29,14 @@ if %errorlevel% equ 0 (
         start /min cmd /c "mongod --dbpath C:\data\db"
         timeout /t 3 /nobreak >nul
     ) else (
-        echo [PERINGATAN] MongoDB tidak ditemukan sebagai service maupun command.
-        echo              Pastikan MongoDB sudah terinstall dan dijalankan manual.
+        echo [PERINGATAN] MongoDB tidak ditemukan. Jalankan manual dulu.
     )
 )
 
 REM === INSTALL DEPENDENCIES JIKA PERLU ===
 echo [2/4] Memeriksa dependensi backend...
 if not exist "backend\node_modules" (
-    echo       Menginstall... (ini hanya sekali)
+    echo       Menginstall...
     cd backend && npm install --silent && cd ..
 ) else (
     echo       OK
@@ -45,7 +44,7 @@ if not exist "backend\node_modules" (
 
 echo [3/4] Memeriksa dependensi frontend...
 if not exist "frontend\node_modules" (
-    echo       Menginstall... (ini hanya sekali)
+    echo       Menginstall...
     cd frontend && npm install --silent && cd ..
 ) else (
     echo       OK
@@ -53,9 +52,7 @@ if not exist "frontend\node_modules" (
 
 REM === SETUP .ENV JIKA BELUM ADA ===
 if not exist "backend\.env" (
-    echo [INFO] File .env tidak ditemukan, membuat dari template...
     copy "backend\.env.example" "backend\.env" >nul
-    echo       .env berhasil dibuat.
 )
 
 REM === AMBIL IP JARINGAN ===
@@ -68,29 +65,37 @@ set LOCALIP=%LOCALIP: =%
 
 REM === JALANKAN SERVER ===
 echo [4/4] Menjalankan server...
-echo.
-echo ================================================
-echo   AKSES DI KOMPUTER INI:
-echo     http://localhost:5173
-echo.
-echo   AKSES DARI KOMPUTER LAIN (jaringan sama):
-echo     http://%LOCALIP%:5173
-echo.
-echo   Login: admin / Admin123!
-echo ================================================
-echo.
-echo   Bagikan alamat http://%LOCALIP%:5173 ke komputer lain
-echo ================================================
-echo.
 
 start "Backend - SDH" cmd /k "cd /d %~dp0backend && npm start"
 timeout /t 2 /nobreak >nul
 start "Frontend - SDH" cmd /k "cd /d %~dp0frontend && npm run dev"
 timeout /t 3 /nobreak >nul
 
-REM Buka browser otomatis
 start http://localhost:5173
 
-echo Semua server berjalan. Browser akan terbuka otomatis.
 echo.
+echo.
+echo  ****************************************************
+echo  *                                                  *
+echo  *   ALAMAT UNTUK KOMPUTER LAIN (jaringan sama):   *
+echo  *                                                  *
+echo  *     http://%COMPUTERNAME%:5173
+echo  *                                                  *
+echo  *   (cadangan jika nama tidak jalan pakai IP:)    *
+echo  *     http://%LOCALIP%:5173
+echo  *                                                  *
+echo  *   Login:  admin  /  Admin123!                   *
+echo  *                                                  *
+echo  ****************************************************
+echo.
+echo  Server aktif. Jangan tutup jendela ini.
+echo  Tekan sembarang tombol untuk MEMATIKAN semua server.
+echo.
+pause >nul
+
+REM Matikan semua server saat user tekan tombol
+echo Menghentikan server...
+taskkill /f /fi "WINDOWTITLE eq Backend - SDH*" >nul 2>&1
+taskkill /f /fi "WINDOWTITLE eq Frontend - SDH*" >nul 2>&1
+echo Server dihentikan.
 pause
